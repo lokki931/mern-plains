@@ -4,12 +4,12 @@ import { IPlane } from './../../app/types';
 import { createPlane, getPlane } from './planeAPI';
 
 export interface planeState {
-  plane: IPlane[];
+  plane?: IPlane;
   isLoding: boolean;
 }
 
 const initialState: planeState = {
-  plane: [],
+  plane: undefined,
   isLoding: false,
 };
 
