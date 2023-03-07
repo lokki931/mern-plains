@@ -4,7 +4,7 @@ import { IPlane } from './../../app/types';
 import { createPlane, getPlane } from './planeAPI';
 
 export interface planeState {
-  plane: IPlane | null;
+  plane: IPlane;
   isLoding: boolean;
   errors: {
     name?: { message?: string };
@@ -15,7 +15,14 @@ export interface planeState {
   } | null;
 }
 const initialState: planeState = {
-  plane: null,
+  plane: {
+    name: '',
+    capacity: '',
+    description: '',
+    planeImage: '',
+    price: 0,
+    _id: '',
+  },
   isLoding: false,
   errors: null,
 };
@@ -53,9 +60,9 @@ export const planeSlice = createSlice({
       .addCase(getAsync.pending, (state) => {
         state.isLoding = true;
       })
-      .addCase(getAsync.fulfilled, (state, action) => {
+      .addCase(getAsync.fulfilled, (state, action: PayloadAction<IPlane>) => {
         state.isLoding = false;
-        if (action.payload) state.plane = action.payload[0];
+        if (action.payload) state.plane = action.payload;
       })
       .addCase(getAsync.rejected, (state) => {
         state.isLoding = true;

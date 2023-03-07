@@ -5,5 +5,4 @@ export interface IPlane {
   description: string;
   capacity: string;
   planeImage: string;
-  __v: number;
 }

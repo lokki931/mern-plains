@@ -8,5 +8,5 @@ export const createPlane = async (data: FormData) => {
 
 export const getPlane = async (id: string) => {
   const response = await axios.get('/api/planes/' + id);
-  return response.data;
+  return response.data[0];
 };
