@@ -21,7 +21,7 @@ const PlanePage: React.FC = () => {
       <div>{plane?.capacity}</div>
       <div>{plane?.price} $</div>
       <div>
-        <img src={plane?.planeImage} alt={plane?.name} />
+        <img src={plane?.planeImage ? plane?.planeImage : ''} alt={plane?.name} />
       </div>
     </div>
   );

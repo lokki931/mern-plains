@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchPlanes } from './planesAPI';
 import { IPlane } from './../../app/types';
 
@@ -32,7 +32,7 @@ export const planesSlice = createSlice({
       .addCase(palnesAsync.pending, (state) => {
         state.isLoding = true;
       })
-      .addCase(palnesAsync.fulfilled, (state, action) => {
+      .addCase(palnesAsync.fulfilled, (state, action: PayloadAction<IPlane[]>) => {
         state.isLoding = false;
         state.planes = action.payload;
       })

@@ -1,11 +1,13 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { palnesAsync } from '../../features/planes/planesSlice';
-import { createAsync } from '../../features/plane/planeSlice';
+import { createAsync, resetErrors } from '../../features/plane/planeSlice';
 import { Link } from 'react-router-dom';
 
 function HomePage() {
   const { planes, isLoding } = useAppSelector((state) => state.planes);
+
+  const { errors } = useAppSelector((state) => state.plane);
 
   const [name, setName] = React.useState('');
   const [price, setPrice] = React.useState('');
@@ -36,6 +38,7 @@ function HomePage() {
 
   React.useEffect(() => {
     dispath(palnesAsync());
+    dispath(resetErrors());
   }, [dispath]);
 
   if (isLoding) {
@@ -48,6 +51,7 @@ function HomePage() {
         <label>
           Name:
           <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+          {errors && errors.name && errors.name.message}
         </label>
         <label>
           Price:
@@ -57,6 +61,7 @@ function HomePage() {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
+          {errors && errors.price && errors.price.message}
         </label>
         <label>
           Description:
@@ -66,6 +71,7 @@ function HomePage() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          {errors && errors.description && errors.description.message}
         </label>
         <label>
           Capacity:
@@ -75,10 +81,12 @@ function HomePage() {
             value={capacity}
             onChange={(e) => setCapacity(e.target.value)}
           />
+          {errors && errors.capacity && errors.capacity.message}
         </label>
         <label>
           planeImage:
           <input type="file" name="planeImage" onChange={handleFileChange} />
+          {errors && errors.planeImage && errors.planeImage.message}
         </label>
         <button type="button" onClick={handleCreatePlane}>
           add
