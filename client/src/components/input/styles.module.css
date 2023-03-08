@@ -1,0 +1,14 @@
+.input {
+  padding: 10px;
+  outline: none;
+}
+
+.container {
+  margin: 20px 0;
+  height: 60px;
+}
+
+.error {
+  color: red;
+  font-size: 15px;
+}
