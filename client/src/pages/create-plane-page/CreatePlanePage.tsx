@@ -7,6 +7,7 @@ import Input from '../../components/input/Input';
 const CreatePlanePage: React.FC = () => {
   const navigate = useNavigate();
   const { errors, isLoding } = useAppSelector((state) => state.plane);
+  const dispatсh = useAppDispatch();
   const [name, setName] = React.useState('');
   const [price, setPrice] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -18,7 +19,6 @@ const CreatePlanePage: React.FC = () => {
       setFile(e.target.files[0]);
     }
   };
-  const dispath = useAppDispatch();
 
   const handleCreatePlane = React.useCallback(() => {
     const appForm: FormData = new FormData();
@@ -28,16 +28,16 @@ const CreatePlanePage: React.FC = () => {
     appForm.append('capacity', capacity);
     if (file) appForm.append('planeImage', file);
 
-    dispath(createAsync(appForm)).then((res) => {
+    dispatсh(createAsync(appForm)).then((res) => {
       if (res.meta.requestStatus === 'fulfilled') {
         navigate(`/plane/${res.payload._id}`, { replace: true });
       }
     });
-  }, [capacity, description, dispath, name, file, price, navigate]);
+  }, [capacity, description, dispatсh, name, file, price, navigate]);
 
   React.useEffect(() => {
-    dispath(resetErrors());
-  }, [dispath]);
+    dispatсh(resetErrors());
+  }, [dispatсh]);
 
   if (isLoding) {
     return <p>Loading...</p>;

@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 function HomePage() {
   const { planes, isLoding } = useAppSelector((state) => state.planes);
 
-  const dispath = useAppDispatch();
+  const dispatсh = useAppDispatch();
 
   React.useEffect(() => {
-    dispath(palnesAsync());
-  }, [dispath]);
+    dispatсh(palnesAsync());
+  }, [dispatсh]);
 
   if (isLoding) {
     return <p>Loading...</p>;
